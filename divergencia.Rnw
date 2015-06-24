@@ -51,7 +51,6 @@ El presente artículo describe el proceso seguido por la Escuela Politécnica Na
 \section{Introducción}
 En las últimas décadas el análisis estadístico de datos ha despertado un gran interés en varios campos. El desarrollo de modelos apropiados ha sido un tema común \\
 
-
 Las medidas de divergencia se consideran como medidas cuantitativas de discriminación entre dos poblaciones, caracterizadas  por sus respectivas distribuciones de probabilidad. 
 
 
