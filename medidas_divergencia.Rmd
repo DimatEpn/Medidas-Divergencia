@@ -35,7 +35,7 @@ El conjunto de datos a analizar debe presentar la siguiente estructura:
 * Variable dependiente,
 * Variables independientes.
 
-En nuestro caso, a manera de ejemplo consideramos el siguiente conjunto de datos, :
+En nuestro caso, a manera de ejemplo consideramos el siguiente conjunto de datos:
 
 ```{r, echo=FALSE}
 # Nombre de base de datos
@@ -120,6 +120,38 @@ variable dependiente binaria.
 
 <p align="left"> <img src="figures/fdiv.png" border="0" width="90" height="78"> <font color="SteelBlue">
 __Nodo: Divergencia__ </font> </p>
+
+En el nodo __Divergencia__, se implementa una de las tareas principales del flujograma, la misma que consiste
+en calcular las medidas de divergencia mencionadas anteriormente para cada una de las variables independientes.
+
+* Estadístico `KS`
+
+En nuestro caso empleamos la prueba `KS` para dos muestras como sigue, considerando la variable
+tiempo promedio entre consumos `mean.tic`, por ejemplo, dividimos sus observaciones a través
+del los valores de la variable `var.dep`, es decir construimos dos variables auxiliares, la una
+correspondiente al conjunto `activa` y la otra al `no activa`, tal como muestra el esquema
+siguiente:
+
+<p align="center"> <img src="figures/ejmmdiv.png" border="0" width="318" height="237"> <font color="SteelBlue"> </font> </p>
+
+En __R__ lo realizamos a través de un código similar al siguiente:
+
+```{r}
+df <- data.frame(vardep,data.num[, "mean.tic"])
+mean.tic.act <- subset(df, subset=vardep==1)[,2]
+mean.tic.noact <- subset(df, subset=vardep==0)[,2]
+```	      
+	
+Una vez obtenidas las variables `mean.tic.act` y `mean.tic.noact`, calculamos el estadístico
+`KS` para dichas variables, utilizando la función `ks.test` del paquete `stats`. Tenemos que si
+el valor 
+
+```{r}
+# Estadistico KS
+ks <- ks.test(mean.tic.act, mean.tic.noact)
+ks
+```	      
+
 
 
 
