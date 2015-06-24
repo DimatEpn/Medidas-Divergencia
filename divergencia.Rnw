@@ -1,0 +1,62 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{pst-eucl,pstricks,pstricks-add}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[spanish,activeacute]{babel}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{color}
+\usepackage{url}
+\usepackage{float}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{lmodern}
+\usepackage{setspace}
+
+\onehalfspace %para espacio y medio
+\newcommand{\code}[1]{\fcolorbox{blue!80}{gray!10}{#1}}
+\parindent=0mm
+
+\begin{document}
+
+\begin{center}
+{\bf\Large Medidas de divergencia en modelos de predicción binaria}\\
+\end{center}
+
+\begin{center}
+\begin{multicols}{2}
+{\bf Alex Pérez}\\
+\url{alex.perez@epn.edu.ec}\\
+\texttt{\small Escuela  Politécnica Nacional}\\
+\texttt{\small Quito - Ecuador}\\
+
+{\bf Diego Huaraca}\\
+\url{diego.huaraca@epn.edu.ec}\\
+\texttt{\scriptsize Escuela  Politécnica Nacional}\\
+\texttt{\scriptsize Quito - Ecuador}\\
+\end{multicols}
+\end{center}
+
+\vspace{0.3cm}\hrule\vspace{0.5cm}
+{\raggedright \bf\large Resumen}\\
+\vspace{0.1cm}
+
+El presente artículo describe el proceso seguido por la Escuela Politécnica Nacional.\newline
+\hrule
+
+\section{Introducción}
+En las últimas décadas el análisis estadístico de datos ha despertado un gran interés en varios campos. El desarrollo de modelos apropiados ha sido un tema común \\
+
+
+Las medidas de divergencia se consideran como medidas cuantitativas de discriminación entre dos poblaciones, caracterizadas  por sus respectivas distribuciones de probabilidad. 
+
+
+\subsection{Prueba de Kolmogorov-Smirnov para dos muestras (KS)}
+
+El test KS es una prueba de bondad de ajuste mediante la cual se contrasta la hipótesis de si dos muestras aleatorias independientes provienen de distribuciones continuas idénticas; es una prueba del tipo no paramétrico debido a  que no es necesario realizar suposiciones  a priori de la distribución de los datos.
+
+\end{document}
