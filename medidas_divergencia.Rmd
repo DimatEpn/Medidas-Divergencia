@@ -1,0 +1,144 @@
+<p align="center"> <b> <font color="SteelBlue" size=5> Medidas de Divergencia en Modelos de Predicción Binaria.
+</font> </b> </p>
+
+<p align="center">
+Luis Horna PhD., Alex Pérez Ing. Mat., Diego Huaraca Ing. Mat.
+</p>
+
+<p align="center">
+Departamento de Matemáticas. Facultad de Ciencias.
+</p>
+
+<p align="center">
+Escuela Politécnica Nacional
+</p>
+
+<p align="center">
+_22 de junio de 2015._
+</p>
+
+El presente documento tiene como propósito describir a detalle el flujograma de la figura siguiente,
+así como las funciones utilizadas en el cálculo automático de varias medidas de divergencia en modelos
+de predicción binaria mediante R.
+
+<div align="center"> <img src="figures/flujo.png" border="0" width="594" height="147"> </div>
+
+<p align="left"> <img src="figures/datainput.png" border="0" width="88" height="86"> <font color="SteelBlue">
+__Nodo: Data Input__ </font> </p>
+La tarea que se ejecuta en el nodo __Data Input__ corresponde a la lectura de un archivo
+de datos desde __SPSS__ (formato .sav) mediante la función `read.spss()` del paquete
+`foreign`o desde __Excel__ (formatos .xls, .xlsx) a través de la función `read_excel()`
+del paquete `readxl`. 
+
+El conjunto de datos a analizar debe presentar la siguiente estructura:
+
+* Variable dependiente,
+* Variables independientes.
+
+En nuestro caso, a manera de ejemplo consideramos el siguiente conjunto de datos, :
+
+```{r, echo=FALSE}
+# Nombre de base de datos
+options(warn = -1)
+dir <- "C:/Users/Toshiba/Desktop/Clases EPN/Publicaciones/Medidas-Divergencia"
+setwd(dir)
+```
+
+```{r}
+library(foreign)
+# library(readxl)
+data <- read.spss("data_act.sav", use.value.labels=FALSE, to.data.frame=TRUE)
+# data <- read_excel("data_act.xlsx", sheet=1, na="")
+str(data)
+```
+El objeto `data` es un `data frame` con `r dim(data)[1]` observaciones y `r dim(data)[2]` variables. La
+variable a predecir `var.dep` es una variable binaria que analiza la activación (realizar al menos un consumo)
+de una tarjeta de crédito (tc) en una ventana de tiempo determinada, definida como sigue:
+
+$$
+var.dep =\left\{\begin{array}{ll} 1, &\mbox{si se activa la tc},\\
+             	                  0, &\mbox{caso contrario.}
+									\end{array}
+					\right.
+$$
+
+
+<p align="left"> <img src="figures/poblacion.png" border="0" width="78" height="72"> <font color="SteelBlue">
+__Nodo: Población__ </font> </p>
+La tarea que se ejecuta en el nodo __Población__ consiste únicamente en mostrar la distribución que
+presenta la variable dependiente binaria; permite conocer en que relación se encuentra el número de
+éxitos (activa) respecto al número de fracasos (no activa).
+
+```{r}
+vardep <- data[,"var.dep"]
+table(vardep)
+```
+
+En nuestro caso tenemos la proporción `r round(table(vardep)[2]/table(vardep)[1],3)`, es decir, por cada
+sujeto no activa tenemos aproximadamente `r round(table(vardep)[2]/table(vardep)[1],0)` activa.
+
+<p align="left"> <img src="figures/numerica.png" border="0" width="114" height="86"> <font color="SteelBlue">
+__Nodo: Numérica__ </font> </p>
+En el nodo __Numérica__, se crea una variable `tipo.var`, la misma que permite identificar las variables
+numéricas y las categóricas. 
+
+```{r}
+# Variable numérica o categórica
+tipo.var <- sapply(data,class)
+```
+
+* __Observación.__ El análisis de las variables categóricas se lo realizará en un trabajo posterior.
+
+
+<p align="left"> <img src="figures/numcat.png" border="0" width="119" height="141"> <font color="SteelBlue">
+__Nodo: Numérica - Categórica__ </font> </p>
+En el nodo __Numérica - Categórica__ el conjunto de datos inicial `data` es dividido en dos subconjuntos,
+uno conformado por las variables numéricas y el otro por las categóricas, considerando la varible `tipo.var`
+generada en el nodo previo.
+
+```{r}
+# Variables categóricas
+data.cat <- data[,which(tipo.var!="numeric")]
+
+# Variables numéricas
+data.num <- data[,which(tipo.var=="numeric")]
+```
+
+
+Una vez identificadas las variables numéricas `data.num`, nos centramos en calcular las siguientes
+medidas de divergencia:
+
+* Estadístico de Kolmogorov Smirnov `KS`,
+* Estadístico de Anderson Darling `AD`,
+* Coeficiente de correlación `COR`.
+
+Luego de analizar el poder de predicción de cada una de las variables independientes a través de
+la divergencia generada entre los conjuntos de sujetos `activa` y `no activa`, podemos
+disponder de un criterio de selección de predictores, considerando aquellos que mejor predigan la
+variable dependiente binaria. 
+
+
+<p align="left"> <img src="figures/fdiv.png" border="0" width="90" height="78"> <font color="SteelBlue">
+__Nodo: Divergencia__ </font> </p>
+
+
+
+<p align="left"> <img src="figures/div.png" border="0" width="80" height="88"> <font color="SteelBlue">
+__Nodo: Cálculos__ </font> </p>
+
+
+
+<p align="left"> <img src="figures/output.png" border="0" width="85" height="79"> <font color="SteelBlue">
+__Nodo: Output__ </font> </p>
+
+
+
+
+
+
+
+
+
+
+
+
