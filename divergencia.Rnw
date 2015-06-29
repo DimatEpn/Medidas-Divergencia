@@ -67,12 +67,9 @@ El test AD es en general una prueba más potente que la prueba KS, debido que el
 
 \section{Implementación de R}
 
-
 \section{Resultados}
 
-
 \section{Conclusiones}
-
 
 \section{Bibliografía}
 
