@@ -30,7 +30,7 @@
 \begin{center}
 \begin{multicols}{2}
 {\bf Alex Pérez}\\
-\url{alex.perez@epn.edu.ec}\\
+\url{alex.perezt@epn.edu.ec}\\
 \texttt{\small Escuela  Politécnica Nacional}\\
 \texttt{\small Quito - Ecuador}\\
 
@@ -45,17 +45,36 @@
 {\raggedright \bf\large Resumen}\\
 \vspace{0.1cm}
 
-El presente artículo describe el proceso seguido por la Escuela Politécnica Nacional.\newline
+El presente artículo describe algunas medidas de divergencia que son empleadas en la construcción de modelos de predicción.\newline
 \hrule
 
+\begin{multicols}{2}
 \section{Introducción}
-En las últimas décadas el análisis estadístico de datos ha despertado un gran interés en varios campos. El desarrollo de modelos apropiados ha sido un tema común \\
+En las últimas décadas el análisis estadístico de datos ha despertado un gran interés en varios campos. La resolución de problemas de clasificación en entidades financieras mediante la utilización de modelos es cada vez más frecuente al ser de gran utilidad en los procesos de toma de decisiones. En concreto, tales modelos han sido aplicados con gran éxito a problemas de clasificación de clientes, otorgamientos de productos financieros, etc.\\
 
-Las medidas de divergencia se consideran como medidas cuantitativas de discriminación entre dos poblaciones, caracterizadas  por sus respectivas distribuciones de probabilidad. 
+\section{Medidas de divergencia}
+Las medidas de divergencia se consideran como medidas cuantitativas de discriminación entre dos poblaciones, caracterizadas  por sus respectivas distribuciones de probabilidad, éstas medidas proveen valiosa información sobre de la calidad de los datos a emplearse en el desarrollo de modelos de predicción binaria .\newline
+
+En nuestro trabajo mostramos dos de las medidas de divergencia más utilizadas: Kolmogorov Smirnov $\&$ Anderson Darling.
+
+\subsection{Kolmogorov-Smirnov (KS)}
+
+El test KS es una prueba no paramétrica de bondad de ajuste mediante la cual se contrasta la hipótesis de si dos muestras aleatorias independientes provienen de distribuciones continuas idénticas; es una prueba del tipo no paramétrico debido a  que no es necesario realizar suposiciones a priori de la distribución de los datos.
+
+\subsection{Prueba de Anderson Darling (AD)}
+
+El test AD es en general una prueba más potente que la prueba KS, debido que el estadístico KS se construye como la diferencia máxima entre las funciones de distribución acumulada y no se considera el comportamiento de las colas de la distribución.
+
+\section{Implementación de R}
 
 
-\subsection{Prueba de Kolmogorov-Smirnov para dos muestras (KS)}
+\section{Resultados}
 
-El test KS es una prueba de bondad de ajuste mediante la cual se contrasta la hipótesis de si dos muestras aleatorias independientes provienen de distribuciones continuas idénticas; es una prueba del tipo no paramétrico debido a  que no es necesario realizar suposiciones  a priori de la distribución de los datos.
 
+\section{Conclusiones}
+
+
+\section{Bibliografía}
+
+\end{multicols}
 \end{document}
