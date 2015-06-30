@@ -117,7 +117,14 @@ Una versión detallada de la implementación se puede encontrar en RPubs.
 
 \section{Resultados}
 
+La variable dependiente que hemos considerado en el trabajo se encu
+
+Y será una variable binaria que toma el valor de 1 para los individuos etiquetados como Activa y 0 para los No activa.
+
 Con la finalidad de evaluar los resultados de la implementación se trabajó con una base de 15105 observaciones y 15 variables, en la cual se definió a la variable dependiente de la siguiente manera:
+
+
+
 
 
 
