@@ -4,7 +4,7 @@
 \usepackage[utf8]{inputenc}
 %\usepackage[latin1]{inputenc}
 \usepackage[spanish,activeacute]{babel}
-\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[a4paper,margin=1.5cm]{geometry}
 \usepackage{times}
 \usepackage[T1]{fontenc}
 \usepackage{titlesec}
@@ -69,7 +69,7 @@ El test KS para dos muestras independientes constrasta las hipótesis:
 \label{ecu:01}
 \left\{\begin{tabular}{l} $H_0: F_1(x)=F_2(x), \quad \forall x$\\ $H_1: F_1(x)\neq F_2(x)$\\ \end{tabular}\right.}
 \end{equation}
-donde: $F_1$ y $F_2$ son las funciones de distribución de las muestras aleatorias (continuas) $X\sim \{x_1, x_2, \ldots, x_{n1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n2}\}$ de tamaño $n_1$ y $n_2$ respectivamente.\newline
+donde: $F_1$ y $F_2$ son las funciones de distribución de las muestras aleatorias (continuas) $X\sim \{x_1, x_2, \ldots, x_{n_1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n_2}\}$ de tamaño $n_1$ y $n_2$ respectivamente.\newline
 
 El estadístico empleado para constrastar la hipótesis nula $H_0$ está basado en la utilización de las funciones de distribución empíricas $\hat{F}_1(x)$ y $\hat{F}_2(x)$ de $X$ y $Y$, y su valor es obtenido mediante la expresión:
 \begin{equation}{
@@ -85,7 +85,7 @@ A partir de (\ref{ecu:02}), podemos decir que el estadístico $KS$ es la distanc
 
 El test $AD$ para dos muestras independientes es en general una prueba más potente que el test $KS$, debido que el estadístico $KS$ se construye como la diferencia máxima entre las funciones de distribución empíricas sin considerar el comportamiento en las colas de las distribuciones.\newline
 
-Para constrastar la hipótesis (\ref{ecu:01}) por medio del estadístico ($AD$) asumiremos nuevamente dos funciones de distribución $F_1$ y $F_2$ correspondientes a dos muestras aleatorias (continuas) $X\sim \{x_1, x_2, \ldots, x_{n1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n2}\}$ de tamaño $n_1$ y $n_2$ respectivamente. El estadístico de contraste se obtiene mediante la expresión:
+Para constrastar la hipótesis (\ref{ecu:01}) por medio del estadístico ($AD$) asumiremos nuevamente dos funciones de distribución $F_1$ y $F_2$ correspondientes a dos muestras aleatorias (continuas) $X\sim \{x_1, x_2, \ldots, x_{n_1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n_2}\}$ de tamaño $n_1$ y $n_2$ respectivamente. El estadístico de contraste se obtiene mediante la expresión:
 \begin{equation}{
 \label{ecu:03}
 AD=\frac{n1*n2}{N}\displaystyle\int^{\infty}_{-\infty} \frac{[F_1(x)-F_2(x)]^2}{H_N(x)(1-H_N(x))} dH_N(x) }
@@ -124,8 +124,25 @@ Una versión detallada de la implementación, así como un instructivo sobre la 
 
 \section{Resultados}
 
-Con la finalidad de evaluar los resultados de la implementación se trabajó con una base de 15105 observaciones y 15 variables, en la cual se definió a la variable dependiente de la siguiente manera:
+Con la finalidad de evaluar los resultados de la implementación se trabajó con una base de 15105 observaciones y 15 variables. La variable a predecir $var.dep$ es una variable binaria que analiza la activación (realizar al menos un consumo) de una nueva tarjeta de crédito (tc), por un individuo, en una ventana de tiempo determinada, definida como sigue:
 
+$$
+var.dep =\left\{\begin{array}{ll} 1, &\mbox{si se activa la tc},\\
+             	                  0, &\mbox{caso contrario.}
+									\end{array}
+					\right.
+$$
+
+Luego de ejecutar el algoritmo implementado se obtuvieron los siguientes resultados para los $7$ primeros 
+regresores:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.2\paperwidth]{figures/indicadores.PNG} 
+\caption{Divergencia}
+\label{fig:02}
+\end{figure}
+
+Si analizamos la variable tiempo inter-consumo promedio ($mean.tic$), observamos un $KS$ de $0,9561$ (cercano a 1) y $AD$ de $0,5497$, lo cual indica que este predictor genera una divergencia considerable entre los grupos $activa$ y $no activa$, esto resulta lógico pues se esperaría que mientras el tiempo inter-consumo promedio sea menor, el individuo sea más propenso a activar la nueva tarjeta de crédito. Un análisis similar se podría plantear para las variables restantes, por ejemplo, número de consumos realizados ($consumos$), desviación estándar del tiempro inter-consumo ($sd.tic$), número de tarjetas apertudas los últimos 3 meses ($tc.apert3m$), etc. se esperaría que éstas variables generen una divergencia considerable entre los grupos puesto que analizan el patrón de uso y consumo de tc que registra el individuo.
 
 
 \section{Conclusiones}
