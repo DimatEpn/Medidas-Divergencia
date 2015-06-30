@@ -31,8 +31,8 @@
 \begin{multicols}{2}
 {\bf Alex Pérez}\\
 \url{alex.perezt@epn.edu.ec}\\
-\texttt{\small Escuela  Politécnica Nacional}\\
-\texttt{\small Quito - Ecuador}\\
+\texttt{\scriptsize Escuela  Politécnica Nacional}\\
+\texttt{\scriptsize Quito - Ecuador}\\
 
 {\bf Diego Huaraca}\\
 \url{diego.huaraca@epn.edu.ec}\\
@@ -53,21 +53,73 @@ El presente artículo describe algunas medidas de divergencia que son empleadas 
 En las últimas décadas el análisis estadístico de datos ha despertado un gran interés en varios campos. La resolución de problemas de clasificación en entidades financieras mediante la utilización de modelos es cada vez más frecuente al ser de gran utilidad en los procesos de toma de decisiones. En concreto, tales modelos han sido aplicados con gran éxito a problemas de clasificación de clientes, otorgamientos de productos financieros, etc.\\
 
 \section{Medidas de divergencia}
-Las medidas de divergencia se consideran como medidas cuantitativas de discriminación entre dos poblaciones, caracterizadas  por sus respectivas distribuciones de probabilidad, éstas medidas proveen valiosa información sobre de la calidad de los datos a emplearse en el desarrollo de modelos de predicción binaria .\newline
+Las medidas de divergencia se consideran como medidas cuantitativas de discriminación entre dos poblaciones, caracterizadas  por sus respectivas distribuciones de probabilidad, éstas medidas proveen valiosa información sobre la calidad de los datos a emplearse en el desarrollo de modelos de predicción binaria .\newline
 
 En nuestro trabajo mostramos dos de las medidas de divergencia más utilizadas: Kolmogorov Smirnov $\&$ Anderson Darling.
 
 \subsection{Kolmogorov-Smirnov (KS)}
 
-El test KS es una prueba no paramétrica de bondad de ajuste mediante la cual se contrasta la hipótesis de si dos muestras aleatorias independientes provienen de distribuciones continuas idénticas; es una prueba del tipo no paramétrico debido a  que no es necesario realizar suposiciones a priori de la distribución de los datos.
+El test KS es una prueba de bondad de ajuste mediante la cual se contrasta la hipótesis de si dos muestras aleatorias independientes provienen de distribuciones continuas idénticas; es una prueba del tipo no paramétrico debido que no es necesario realizar suposiciones a priori de la distribución de los datos.\newline
 
-\subsection{Prueba de Anderson Darling (AD)}
+El test KS constrasta la hipótesis:
+\begin{equation}{
+\label{ecu:01}
+\left\{\begin{tabular}{l} $H_0: F_1(x)=F_2(x), \quad \forall x$\\ $H_1: F_1(x)\neq F_2(x)$\\ \end{tabular}\right.}
+\end{equation}
+donde: $F_1$ y $F_2$ corresponden a las funciones de distribución acumuladas de muestras aleatorias continuas $X\sim \{x_1, x_2, \ldots, x_{n1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n2}\}$ de tamaño $n_1$ y $n_2$ respectivamente.\newline
 
-El test AD es en general una prueba más potente que la prueba KS, debido que el estadístico KS se construye como la diferencia máxima entre las funciones de distribución acumulada y no se considera el comportamiento de las colas de la distribución.
+El estadístico empleado para constrastar la hipótesis nula $H_0$ está basado en la utilización de las funciones de distribución acumuladas empíricas de $X$ y $Y$, y su valor es obtenido mediante la expresión:
+\begin{equation}{
+\label{ecu:02}
+\text{KS} = \max_{x} |F_1(x)-F_2(x)|}
+\end{equation}
 
-\section{Implementación de R}
+La hipótesis nula $H_0$ se rechaza si el estadístico KS es mayor que el valor crítico $KS_{\alpha}$, para un nivel de significancia $\alpha$ dado. [Massey, 1951] presenta una tabla de valores críticos para diferentes tamaños de muestra.\newline
+
+A partir de (\ref{ecu:02}), podemos decir que el estadístico KS es la distancia máxima entre $F_1$ y $F_2$, además su valor oscila entre 0 y 1, donde valores cercanos a 0 indican que la distribución de $X$ y $Y$ son idénticas, y valores cercanos a 1 indican que las mismas difieren, es por esto, que el estadístico KS es utilizado como una medida de divergencia entre las distribuciones de dos variables aleatorias continuas.
+
+\subsection{Anderson Darling (AD)}
+
+El test AD en general es una prueba más potente, debido que el estadístico KS se construye como la diferencia máxima entre las funciones de distribución acumulada y no se considera el comportamiento de las colas de la distribución.\newline
+
+Para constrastar la hipótesis (\ref{ecu:01}) por medio del estadístico (AD) asumiremos nuevamente dos funciones de distribución acumuladas $F_1$ y $F_2$ correspondientes a dos muestras aleatorias continuas $X\sim \{x_1, x_2, \ldots, x_{n1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n2}\}$ de tamaño $n_1$ y $n_2$ respectivamente. El estadístico de contraste lo obtenemos como sigue:
+\begin{equation}{
+\label{ecu:03}
+AD=\frac{n1*n2}{N}\displaystyle\int^{\infty}_{-\infty} \frac{[F_1(x)-F_2(x)]^2}{H_N(x)(1-H_N(x))} dH_N(x) }
+\end{equation}
+donde:
+\[
+N=n_1+n_2
+\]
+\[
+H_N(x)=\frac{n_1F_1(x)-n_2F_2(x)}{N}
+\]
+
+[Scholz and Stephens, 1987] proponen utilizar la siguiente fórmula computacional como una aproximación de (\ref{ecu:03}):
+\begin{equation}{
+\label{ecu:04}
+AD=\frac{1}{N}\sum_{i=1}^{k}\frac{1}{n_i}\sum_{j=1}^{N-1} \frac{[NM_{ij}-jn_i]^2}{j(N-j)}, \quad \text{con } k=2}
+\end{equation}
+para lo cual ordenamos los valores de las variables $X$ y $Y$ conjuntamente con la finalidad de obtener una muestra ordenada $Z_1<Z_2<\ldots<Z_N$, y $M_{ij}$ es el número de observaciones de la muestra $i$ que son menores o iguales a $Z_j$.
+
+\section{Implementación}
+
+Una vez que hemos analizado las medidas de divergencia, el siguiente paso consiste en implementar un algoritmo usando \emph{R}\footnote{\url{http://www.r-project.org}} y \emph{R Analytic Flow}\footnote{\url{http://www.ef-prime.com/index_en.html}}, mismo que facilite al usuario trabajar con grandes bases de datos.\newline
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.37\paperwidth]{figures/flujo.PNG} 
+\caption{Flujo implementado}
+\label{fig:01}
+\end{figure}
+
+Una versión detallada de la implementación se puede encontrar en RPubs.
 
 \section{Resultados}
+
+Con la finalidad de evaluar los resultados de la implementación se trabajó con una base de 15105 observaciones y 15 variables, en la cual se definió a la variable dependiente de la siguiente manera:
+
+
 
 \section{Conclusiones}
 
