@@ -45,44 +45,47 @@
 {\raggedright \bf\large Resumen}\\
 \vspace{0.1cm}
 
-El presente artículo describe algunas medidas de divergencia que son empleadas en la construcción de modelos de predicción.\newline
+El presente artículo describe a detalle la aplicación que presentan ciertas medidas de divergencia en la
+construcción de modelos de predicción binaria. La importancia del siguiente estudio radica en el desarrollo
+de un criterio de selección de predictores mediante el análisis de la divergencia generada por cada uno de ellos entre los grupos dados por la variable dependiente binaria.\newline
 \hrule
 
 \begin{multicols}{2}
 \section{Introducción}
-En las últimas décadas el análisis estadístico de datos ha despertado un gran interés en varios campos. La resolución de problemas de clasificación en entidades financieras mediante la utilización de modelos es cada vez más frecuente al ser de gran utilidad en los procesos de toma de decisiones. En concreto, tales modelos han sido aplicados con gran éxito a problemas de clasificación de clientes, otorgamientos de productos financieros, etc.\\
+En las últimas décadas el análisis estadístico de datos ha despertado un gran interés en varios campos. La resolución de problemas de clasificación en entidades financieras mediante la utilización de modelos de predicción binaria es cada vez más frecuente debido a que constituyen una herramienta técnica de gran utilidad en los procesos de toma de decisiones. En concreto, tales modelos han sido aplicados exitosamente en problemas de clasificación de clientes, otorgamientos de productos financieros, etc. considerando su historial crediticio y su hábito de pago, de ahí la importancia de construir un criterio fundamentado estadísticamente
+que permita seleccionar los predictores con el mayor poder de predicción, puesto que en la actualidad las variables son incluidas intuitivamente dependiendo de la experiencia del modelador, en ocasiones omitiendo predictores importantes y en otras generando modelos con un bajo rendimiento de clasificación.
 
 \section{Medidas de divergencia}
-Las medidas de divergencia se consideran como medidas cuantitativas de discriminación entre dos poblaciones, caracterizadas  por sus respectivas distribuciones de probabilidad, éstas medidas proveen valiosa información sobre la calidad de los datos a emplearse en el desarrollo de modelos de predicción binaria .\newline
+Las medidas de divergencia se consideran como medidas cuantitativas de discriminación entre dos poblaciones, caracterizadas  por sus respectivas distribuciones de probabilidad, éstas medidas proveen valiosa información sobre la calidad de los datos a emplearse en el desarrollo de modelos de predicción binaria.\newline
 
 En nuestro trabajo mostramos dos de las medidas de divergencia más utilizadas: Kolmogorov Smirnov $\&$ Anderson Darling.
 
 \subsection{Kolmogorov-Smirnov (KS)}
 
-El test KS es una prueba de bondad de ajuste mediante la cual se contrasta la hipótesis de si dos muestras aleatorias independientes provienen de distribuciones continuas idénticas; es una prueba del tipo no paramétrico debido que no es necesario realizar suposiciones a priori de la distribución de los datos.\newline
+El test KS para dos muestras es una prueba de bondad de ajuste mediante la cual se contrasta la hipótesis de si dos muestras aleatorias independientes provienen de distribuciones continuas idénticas; es una prueba del tipo no paramétrico debido que no es necesario realizar suposiciones a priori sobre la distribución de los datos.\newline
 
-El test KS constrasta la hipótesis:
+El test KS para dos muestras independientes constrasta las hipótesis:
 \begin{equation}{
 \label{ecu:01}
 \left\{\begin{tabular}{l} $H_0: F_1(x)=F_2(x), \quad \forall x$\\ $H_1: F_1(x)\neq F_2(x)$\\ \end{tabular}\right.}
 \end{equation}
-donde: $F_1$ y $F_2$ corresponden a las funciones de distribución acumuladas de muestras aleatorias continuas $X\sim \{x_1, x_2, \ldots, x_{n1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n2}\}$ de tamaño $n_1$ y $n_2$ respectivamente.\newline
+donde: $F_1$ y $F_2$ son las funciones de distribución de las muestras aleatorias (continuas) $X\sim \{x_1, x_2, \ldots, x_{n1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n2}\}$ de tamaño $n_1$ y $n_2$ respectivamente.\newline
 
-El estadístico empleado para constrastar la hipótesis nula $H_0$ está basado en la utilización de las funciones de distribución acumuladas empíricas de $X$ y $Y$, y su valor es obtenido mediante la expresión:
+El estadístico empleado para constrastar la hipótesis nula $H_0$ está basado en la utilización de las funciones de distribución empíricas $\hat{F}_1(x)$ y $\hat{F}_2(x)$ de $X$ y $Y$, y su valor es obtenido mediante la expresión:
 \begin{equation}{
 \label{ecu:02}
-\text{KS} = \max_{x} |F_1(x)-F_2(x)|}
+\text{KS} = \max_{x} |\hat{F}_1(x)-\hat{F}_2(x)|}
 \end{equation}
 
-La hipótesis nula $H_0$ se rechaza si el estadístico KS es mayor que el valor crítico $KS_{\alpha}$, para un nivel de significancia $\alpha$ dado. [Massey, 1951] presenta una tabla de valores críticos para diferentes tamaños de muestra.\newline
+La hipótesis nula $H_0$ se rechaza si el estadístico $KS$ es mayor que el valor crítico $KS_{\alpha}$, para un nivel de significancia $\alpha$ dado. [Massey, 1951] presenta una tabla de valores críticos para diferentes tamaños de muestra.\newline
 
-A partir de (\ref{ecu:02}), podemos decir que el estadístico KS es la distancia máxima entre $F_1$ y $F_2$, además su valor oscila entre 0 y 1, donde valores cercanos a 0 indican que la distribución de $X$ y $Y$ son idénticas, y valores cercanos a 1 indican que las mismas difieren, es por esto, que el estadístico KS es utilizado como una medida de divergencia entre las distribuciones de dos variables aleatorias continuas.
+A partir de (\ref{ecu:02}), podemos decir que el estadístico $KS$ es la distancia máxima entre $\hat{F}_1$ y $\hat{F}_2$, y que su valor oscila entre 0 y 1, donde valores cercanos a 0 indican que la distribuciones de $X$ y $Y$ son idénticas, y valores cercanos a 1 indican que las mismas difieren, es por esta razón, que el estadístico $KS$ es utilizado en la práctica como una medida de divergencia entre las distribuciones de dos variables aleatorias continuas.
 
 \subsection{Anderson Darling (AD)}
 
-El test AD en general es una prueba más potente, debido que el estadístico KS se construye como la diferencia máxima entre las funciones de distribución acumulada y no se considera el comportamiento de las colas de la distribución.\newline
+El test $AD$ para dos muestras independientes es en general una prueba más potente que el test $KS$, debido que el estadístico $KS$ se construye como la diferencia máxima entre las funciones de distribución empíricas sin considerar el comportamiento en las colas de las distribuciones.\newline
 
-Para constrastar la hipótesis (\ref{ecu:01}) por medio del estadístico (AD) asumiremos nuevamente dos funciones de distribución acumuladas $F_1$ y $F_2$ correspondientes a dos muestras aleatorias continuas $X\sim \{x_1, x_2, \ldots, x_{n1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n2}\}$ de tamaño $n_1$ y $n_2$ respectivamente. El estadístico de contraste lo obtenemos como sigue:
+Para constrastar la hipótesis (\ref{ecu:01}) por medio del estadístico ($AD$) asumiremos nuevamente dos funciones de distribución $F_1$ y $F_2$ correspondientes a dos muestras aleatorias (continuas) $X\sim \{x_1, x_2, \ldots, x_{n1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n2}\}$ de tamaño $n_1$ y $n_2$ respectivamente. El estadístico de contraste se obtiene mediante la expresión:
 \begin{equation}{
 \label{ecu:03}
 AD=\frac{n1*n2}{N}\displaystyle\int^{\infty}_{-\infty} \frac{[F_1(x)-F_2(x)]^2}{H_N(x)(1-H_N(x))} dH_N(x) }
@@ -100,11 +103,12 @@ H_N(x)=\frac{n_1F_1(x)-n_2F_2(x)}{N}
 \label{ecu:04}
 AD=\frac{1}{N}\sum_{i=1}^{k}\frac{1}{n_i}\sum_{j=1}^{N-1} \frac{[NM_{ij}-jn_i]^2}{j(N-j)}, \quad \text{con } k=2}
 \end{equation}
-para lo cual ordenamos los valores de las variables $X$ y $Y$ conjuntamente con la finalidad de obtener una muestra ordenada $Z_1<Z_2<\ldots<Z_N$, y $M_{ij}$ es el número de observaciones de la muestra $i$ que son menores o iguales a $Z_j$.
+para lo cual ordenamos los valores de las variables $X$ y $Y$ conjuntamente con la finalidad de obtener una muestra ordenada $Z_1<Z_2<\ldots<Z_N$, y finalmente definir a $M_{ij}$ como el número de observaciones de la muestra $i$ que son menores o iguales que $Z_j$.
 
 \section{Implementación}
 
-Una vez que hemos analizado las medidas de divergencia, el siguiente paso consiste en implementar un algoritmo usando \emph{R}\footnote{\url{http://www.r-project.org}} y \emph{R Analytic Flow}\footnote{\url{http://www.ef-prime.com/index_en.html}}, mismo que facilite al usuario trabajar con grandes bases de datos.\newline
+Una vez que hemos descrito las medidas de divergencia, el siguiente paso consiste en implementar un algoritmo
+que permita calcularlas automáticamente, usando \emph{R}\footnote{\url{http://www.r-project.org}} y \emph{R Analytic Flow}\footnote{\url{http://www.ef-prime.com/index_en.html}}
 
 \begin{figure}[H]
 \centering
@@ -113,7 +117,10 @@ Una vez que hemos analizado las medidas de divergencia, el siguiente paso consis
 \label{fig:01}
 \end{figure}
 
-Una versión detallada de la implementación se puede encontrar en RPubs.
+El flujograma de la figura anterior ejecuta todas las tareas necesarias para el cálculo de las medidas $KS$ y
+$AD$, la implementación se la realizó de tal manera que facilite al usuario trabajar con volumenes de datos a gran escala sin la necesidad de tener conocimientos previos de R, el flujo generado puede ser obtenido directamente del repositorio GitHub\footnote{\url{https://github.com/DimatEpn/Flujograma-Medidas-Divergencia}}.\newline
+
+Una versión detallada de la implementación, así como un instructivo sobre la utilización del flujo se pueden encontrar en RPubs\footnote{\url{https://rpubs.com/DimatEpn/90586}}.
 
 \section{Resultados}
 
