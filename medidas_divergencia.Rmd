@@ -1,4 +1,5 @@
-<p align="center"> <b> <font color="SteelBlue" size=5> Medidas de Divergencia en Modelos de Predicción Binaria.
+<p align="center"> <b> <font color="SteelBlue" size=5> 
+Medidas de Divergencia en Modelos de Predicción Binaria.
 </font> </b> </p>
 
 <p align="center">
@@ -49,7 +50,13 @@ library(foreign)
 # library(readxl)
 data <- read.spss("data_act.sav", use.value.labels=FALSE, to.data.frame=TRUE)
 # data <- read_excel("data_act.xlsx", sheet=1, na="")
-str(data)
+#str(data)
+#library(js)
+#DT::datatable(round(data[1:50,],2), filter="top",options = list(
+#  searching = TRUE,
+#  pageLength = 5,
+#  lengthMenu = c(5, 10, 15)
+#))
 ```
 El objeto `data` es un `data frame` con `r dim(data)[1]` observaciones y `r dim(data)[2]` variables. La
 variable a predecir `var.dep` es una variable binaria que analiza la activación (realizar al menos un consumo)
