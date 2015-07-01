@@ -4,7 +4,7 @@
 \usepackage[utf8]{inputenc}
 %\usepackage[latin1]{inputenc}
 \usepackage[spanish,activeacute]{babel}
-\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[a4paper,margin=1.5cm]{geometry}
 \usepackage{times}
 \usepackage[T1]{fontenc}
 \usepackage{titlesec}
