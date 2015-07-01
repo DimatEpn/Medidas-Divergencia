@@ -69,7 +69,6 @@ var.dep =\left\{\begin{array}{ll} 1, &\mbox{si se activa la tc},\\
 					\right.
 $$
 
-
 <p align="left"> <img src="figures/poblacion.png" border="0" width="78" height="72"> <font color="SteelBlue">
 __Nodo: Población__ </font> </p>
 La tarea que se ejecuta en el nodo __Población__ consiste únicamente en mostrar la distribución que
