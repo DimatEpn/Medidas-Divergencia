@@ -124,17 +124,17 @@ Una versión detallada de la implementación, así como un instructivo sobre la 
 
 \section{Resultados}
 
-Con la finalidad de evaluar los resultados de la implementación se trabajó con una base de 15105 observaciones y 15 variables. La variable a predecir $var.dep$ es una variable binaria que analiza la activación (realizar al menos un consumo) de una nueva tarjeta de crédito (tc), por un individuo, en una ventana de tiempo determinada, definida como sigue:
+Con la finalidad de evaluar los resultados de la implementación se trabajó con una base de 15105 observaciones y 15 variables. La variable a predecir $var.dep$ es una variable binaria que analiza la activación (realizar al menos un consumo) de una nueva tarjeta de crédito TC, por un individuo, en una ventana de tiempo determinada, definida como sigue:
 
 $$
-var.dep =\left\{\begin{array}{ll} 1, &\mbox{si se activa la tc},\\
+var.dep =\left\{\begin{array}{ll} 1, &\mbox{si se activa la TC},\\
              	                  0, &\mbox{caso contrario.}
 									\end{array}
 					\right.
 $$
 
-Luego de ejecutar el algoritmo implementado se obtuvieron los siguientes resultados para los $7$ primeros 
-regresores:
+Al ejecutar el algoritmo (Figura 1) se obtuvieron los siguientes resultados para los $7$ primeros 
+predictores:
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.2\paperwidth]{figures/indicadores.PNG} 
@@ -142,12 +142,37 @@ regresores:
 \label{fig:02}
 \end{figure}
 
-Si analizamos la variable tiempo inter-consumo promedio ($mean.tic$), observamos un $KS$ de $0,9561$ (cercano a 1) y $AD$ de $0,5497$, lo cual indica que este predictor genera una divergencia considerable entre los grupos $activa$ y $no activa$, esto resulta lógico pues se esperaría que mientras el tiempo inter-consumo promedio sea menor, el individuo sea más propenso a activar la nueva tarjeta de crédito. Un análisis similar se podría plantear para las variables restantes, por ejemplo, número de consumos realizados ($consumos$), desviación estándar del tiempro inter-consumo ($sd.tic$), número de tarjetas apertudas los últimos 3 meses ($tc.apert3m$), etc. se esperaría que éstas variables generen una divergencia considerable entre los grupos puesto que analizan el patrón de uso y consumo de tc que registra el individuo.
-
+Si analizamos la variable tiempo inter-consumo promedio ($mean.tic$), observamos un $KS$ de $0,9561$ (cercano a 1) y $AD$ de $0,5497$, lo cual indica que este predictor genera una divergencia considerable entre los grupos \emph{activa} y \emph{no activa}, esto resulta lógico pues se esperaría que mientras el tiempo inter-consumo promedio sea menor, el individuo sea más propenso a activar la nueva tarjeta de crédito. Un análisis similar se podría plantear para las variables restantes, por ejemplo, número de consumos realizados ($consumos$), desviación estándar del tiempro inter-consumo ($sd.tic$), número de tarjetas apertudas los últimos 3 meses ($tc.apert3m$), etc. se esperaría que éstas variables generen una divergencia considerable entre los grupos puesto que analizan el patrón de uso y consumo de TC que registra el individuo.
 
 \section{Conclusiones}
+\begin{enumerate}
+\item Dentro de la construcción de modelos de predicción binaria una de las problemáticas, a las cuales el
+especialista enfrenta consiste en establecer a priori una cota mínima de divergencia que generará el modelo
+final, mediante la metodología planteada se establece que dicha cota está dada por la máxima divergencia que presentan las variables predictoras del modelo.
+
+\item La metodología descrita genera un criterio de selección de predictores, permitiendo reducir 
+tiempo y recursos en la construcción de modelos de este tipo. Esto a su vez nos da una idea de la
+calidad y tipo de información con la cual se trabaja.
+
+
+\end{enumerate}
+
 
 \section{Bibliografía}
+\begin{itemize}
+\item Arnold, T. and Emerson, J. (2011). Nonparametric Goodness-of-Fit Tests for Discrete Null Distributions. \emph{The R Journal}, 3:34-35.
+
+\item Engmann, S. and Cousineau, D. (2011). Comparing Distributions: The Two-Sample Anderson-Darling Test as an Alternative to the Kolmogorov-Smirnof Test. \emph{Journal of Applied Quantitative Methods}, 6.
+
+\item Massey, F. (1951). The Kolmogorov-Smirnov test for goodness of fit. \emph{Journal of the American Statistical Association}, 68-78.
+
+\item R Core Team (2014). \emph{R: A Language and Environment for Statistical Computing}. R Foundation for Statistical Computing, Vienna, Austria.
+
+\item Scholz, F. W. and Stephens, M. A. (1987). K-Sample Anderson-Darling Tests. \emph{Journal of the American Statistical Association}, 82:918–919.
+\end{itemize}
+
+\vspace{11cm}
+\quad
 
 \end{multicols}
 \end{document}
