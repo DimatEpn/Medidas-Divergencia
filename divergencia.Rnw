@@ -4,7 +4,7 @@
 \usepackage[utf8]{inputenc}
 %\usepackage[latin1]{inputenc}
 \usepackage[spanish,activeacute]{babel}
-\usepackage[a4paper,margin=1.5cm]{geometry}
+\usepackage[a4paper,margin=1.9cm]{geometry}
 \usepackage{times}
 \usepackage[T1]{fontenc}
 \usepackage{titlesec}
@@ -24,21 +24,12 @@
 \begin{document}
 
 \begin{center}
-{\bf\Large Medidas de divergencia en modelos de predicción binaria}\\
-\end{center}
-
-\begin{center}
-\begin{multicols}{2}
-{\bf Alex Pérez}\\
-\url{alex.perezt@epn.edu.ec}\\
-\texttt{\scriptsize Escuela  Politécnica Nacional}\\
-\texttt{\scriptsize Quito - Ecuador}\\
-
-{\bf Diego Huaraca}\\
-\url{diego.huaraca@epn.edu.ec}\\
-\texttt{\scriptsize Escuela  Politécnica Nacional}\\
-\texttt{\scriptsize Quito - Ecuador}\\
-\end{multicols}
+{\bf\Large Medidas de divergencia en modelos de predicción binaria}\\[3mm]
+{Ing. Diego Huaraca*; Ing. Alex Pérez**}\\
+\emph{\scriptsize *Escuela Politécnica Nacional, Facultad de Ciencias, Quito, Ecuador}\\
+{\scriptsize \url{e-mail: diego.huaracas@epn.edu.ec}}\\
+\emph{\scriptsize **Escuela Politécnica Nacional, Facultad de Ciencias, Quito, Ecuador}\\
+{\scriptsize \url{e-mail: alex.perezt@epn.edu.ec}}
 \end{center}
 
 \vspace{0.3cm}\hrule\vspace{0.5cm}
@@ -56,7 +47,7 @@ En las últimas décadas el análisis estadístico de datos ha despertado un gra
 que permita seleccionar los predictores con el mayor poder de predicción, puesto que en la actualidad las variables son incluidas intuitivamente dependiendo de la experiencia del modelador, en ocasiones omitiendo predictores importantes y en otras generando modelos con un bajo rendimiento de clasificación.
 
 \section{Medidas de divergencia}
-Las medidas de divergencia se consideran como medidas cuantitativas de discriminación entre dos poblaciones, caracterizadas  por sus respectivas distribuciones de probabilidad, éstas medidas proveen valiosa información sobre la calidad de los datos a emplearse en el desarrollo de modelos de predicción binaria.\newline
+Las medidas de divergencia se consideran como medidas cuantitativas de discriminación entre dos poblaciones, caracterizadas  por sus respectivas distribuciones de probabilidad, estas medidas proveen valiosa información sobre la calidad de los datos a emplearse en el desarrollo de modelos de predicción binaria.\newline
 
 En nuestro trabajo mostramos dos de las medidas de divergencia más utilizadas: Kolmogorov Smirnov $\&$ Anderson Darling.
 
@@ -69,7 +60,7 @@ El test KS para dos muestras independientes constrasta las hipótesis:
 \label{ecu:01}
 \left\{\begin{tabular}{l} $H_0: F_1(x)=F_2(x), \quad \forall x$\\ $H_1: F_1(x)\neq F_2(x)$\\ \end{tabular}\right.}
 \end{equation}
-donde: $F_1$ y $F_2$ son las funciones de distribución de las muestras aleatorias (continuas) $X\sim \{x_1, x_2, \ldots, x_{n1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n2}\}$ de tamaño $n_1$ y $n_2$ respectivamente.\newline
+donde: $F_1$ y $F_2$ son las funciones de distribución de las muestras aleatorias (continuas) $X\sim \{x_1, x_2, \ldots, x_{n_1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n_2}\}$ de tamaño $n_1$ y $n_2$ respectivamente.\newline
 
 El estadístico empleado para constrastar la hipótesis nula $H_0$ está basado en la utilización de las funciones de distribución empíricas $\hat{F}_1(x)$ y $\hat{F}_2(x)$ de $X$ y $Y$, y su valor es obtenido mediante la expresión:
 \begin{equation}{
@@ -85,7 +76,7 @@ A partir de (\ref{ecu:02}), podemos decir que el estadístico $KS$ es la distanc
 
 El test $AD$ para dos muestras independientes es en general una prueba más potente que el test $KS$, debido que el estadístico $KS$ se construye como la diferencia máxima entre las funciones de distribución empíricas sin considerar el comportamiento en las colas de las distribuciones.\newline
 
-Para constrastar la hipótesis (\ref{ecu:01}) por medio del estadístico ($AD$) asumiremos nuevamente dos funciones de distribución $F_1$ y $F_2$ correspondientes a dos muestras aleatorias (continuas) $X\sim \{x_1, x_2, \ldots, x_{n1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n2}\}$ de tamaño $n_1$ y $n_2$ respectivamente. El estadístico de contraste se obtiene mediante la expresión:
+Para constrastar la hipótesis (\ref{ecu:01}) por medio del estadístico ($AD$) asumiremos nuevamente dos funciones de distribución $F_1$ y $F_2$ correspondientes a dos muestras aleatorias (continuas) $X\sim \{x_1, x_2, \ldots, x_{n_1}\}$ y $Y\sim \{y_1, y_2, \ldots, y_{n_2}\}$ de tamaño $n_1$ y $n_2$ respectivamente. El estadístico de contraste se obtiene mediante la expresión:
 \begin{equation}{
 \label{ecu:03}
 AD=\frac{n1*n2}{N}\displaystyle\int^{\infty}_{-\infty} \frac{[F_1(x)-F_2(x)]^2}{H_N(x)(1-H_N(x))} dH_N(x) }
@@ -124,20 +115,49 @@ Una versión detallada de la implementación, así como un instructivo sobre la 
 
 \section{Resultados}
 
-La variable dependiente que hemos considerado en el trabajo se encu
+Con la finalidad de evaluar los resultados de la implementación se trabajó con una base de 15105 observaciones y 15 variables. La variable a predecir $var.dep$ es una variable binaria que analiza la activación (realizar al menos un consumo) de una nueva tarjeta de crédito TC, por un individuo, en una ventana de tiempo determinada, definida como sigue:
 
-Y será una variable binaria que toma el valor de 1 para los individuos etiquetados como Activa y 0 para los No activa.
+$$
+var.dep =\left\{\begin{array}{ll} 1, &\mbox{si se activa la TC},\\
+             	                  0, &\mbox{caso contrario.}
+									\end{array}
+					\right.
+$$
 
-Con la finalidad de evaluar los resultados de la implementación se trabajó con una base de 15105 observaciones y 15 variables, en la cual se definió a la variable dependiente de la siguiente manera:
+Al ejecutar el algoritmo (Figura 1) se obtuvieron los siguientes resultados para los $7$ primeros 
+predictores:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.2\paperwidth]{figures/indicadores.PNG} 
+\caption{Divergencia}
+\label{fig:02}
+\end{figure}
 
-
-
-
-
+Si analizamos la variable tiempo inter-consumo promedio ($mean.tic$), observamos un $KS$ de $0,9561$ (cercano a 1) y $AD$ de $0,5497$, lo cual indica que este predictor genera una divergencia considerable entre los grupos \emph{activa} y \emph{no activa}, esto resulta lógico pues se esperaría que mientras el tiempo inter-consumo promedio sea menor, el individuo sea más propenso a activar la nueva tarjeta de crédito. Un análisis similar se podría plantear para las variables restantes, por ejemplo, número de consumos realizados ($consumos$), desviación estándar del tiempro inter-consumo ($sd.tic$), número de tarjetas apertudas los últimos 3 meses ($tc.apert3m$), etc. se esperaría que estas variables generen una divergencia considerable entre los grupos puesto que analizan el patrón de uso y consumo de TC que registra el individuo.
 
 \section{Conclusiones}
+\begin{enumerate}
+\item Dentro de la construcción de modelos de predicción binaria una de las problemáticas, a las cuales el
+especialista enfrenta consiste en establecer a priori una cota mínima de divergencia que generará el modelo
+final, mediante la metodología planteada se establece que dicha cota está dada por la máxima divergencia que presentan las variables predictoras del modelo.
+
+\item La metodología descrita genera un criterio de selección de predictores, permitiendo reducir 
+tiempo y recursos en la construcción de modelos de este tipo. Esto a su vez nos da una idea de la
+calidad y tipo de información con la cual se trabaja.
+
+\end{enumerate}
 
 \section{Bibliografía}
+\begin{itemize}
+\item Arnold, T. and Emerson, J. (2011). Nonparametric Goodness-of-Fit Tests for Discrete Null Distributions. \emph{The R Journal}, 3:34-35.
+
+\item Engmann, S. and Cousineau, D. (2011). Comparing Distributions: The Two-Sample Anderson-Darling Test as an Alternative to the Kolmogorov-Smirnof Test. \emph{Journal of Applied Quantitative Methods}, 6.
+\item Massey, F. (1951). The Kolmogorov-Smirnov test for goodness of fit. \emph{Journal of the American Statistical Association}, 68-78.
+\item R Core Team (2014). \emph{R: A Language and Environment for Statistical Computing}. R Foundation for Statistical Computing, Vienna, Austria.
+\item Scholz, F. W. and Stephens, M. A. (1987). K-Sample Anderson-Darling Tests. \emph{Journal of the American Statistical Association}, 82:918–919.
+\end{itemize}
+\vspace{1cm}
+\quad
 
 \end{multicols}
 \end{document}
