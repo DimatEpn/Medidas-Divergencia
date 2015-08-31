@@ -39,6 +39,9 @@
 El presente artículo describe a detalle la aplicación que presentan ciertas medidas de divergencia en la
 construcción de modelos de predicción binaria. La importancia del siguiente estudio radica en el desarrollo
 de un criterio de selección de predictores mediante el análisis de la divergencia generada por cada uno de ellos entre los grupos dados por la variable dependiente binaria.\newline
+
+{\bf Palabras claves: } Medidas de divergencia, variable dependiente binaria, selección de predictores\newline
+
 \hrule
 
 \begin{multicols}{2}
@@ -150,14 +153,11 @@ calidad y tipo de información con la cual se trabaja.
 \section{Bibliografía}
 \begin{itemize}
 \item Arnold, T. and Emerson, J. (2011). Nonparametric Goodness-of-Fit Tests for Discrete Null Distributions. \emph{The R Journal}, 3:34-35.
-
 \item Engmann, S. and Cousineau, D. (2011). Comparing Distributions: The Two-Sample Anderson-Darling Test as an Alternative to the Kolmogorov-Smirnof Test. \emph{Journal of Applied Quantitative Methods}, 6.
 \item Massey, F. (1951). The Kolmogorov-Smirnov test for goodness of fit. \emph{Journal of the American Statistical Association}, 68-78.
 \item R Core Team (2014). \emph{R: A Language and Environment for Statistical Computing}. R Foundation for Statistical Computing, Vienna, Austria.
 \item Scholz, F. W. and Stephens, M. A. (1987). K-Sample Anderson-Darling Tests. \emph{Journal of the American Statistical Association}, 82:918–919.
 \end{itemize}
-\vspace{1cm}
-\quad
 
 \end{multicols}
 \end{document}
